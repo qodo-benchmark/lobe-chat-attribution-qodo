@@ -60,7 +60,14 @@ export class PluginModel {
       .orderBy(desc(userInstalledPlugins.createdAt));
 
     return data.map<LobeTool>((item) => ({
-      ...item,
+      createdAt: item.createdAt,
+      customParams: item.customParams,
+      identifier: item.identifier,
+      manifest: item.manifest,
+      settings: item.settings,
+      source: item.source,
+      type: item.type,
+      updatedAt: item.updatedAt,
       runtimeType: item.manifest?.type || 'default',
     }));
   };
