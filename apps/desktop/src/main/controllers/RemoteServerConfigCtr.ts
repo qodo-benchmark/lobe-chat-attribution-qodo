@@ -280,13 +280,17 @@ export default class RemoteServerConfigCtr extends ControllerModule {
     const lowerError = error.toLowerCase();
 
     // Check OIDC error codes
-    if (NON_RETRYABLE_OIDC_ERRORS.some((code) => lowerError.includes(code))) {
-      return true;
+    for (let i = 0; i < NON_RETRYABLE_OIDC_ERRORS.length; i++) {
+      if (lowerError.includes(NON_RETRYABLE_OIDC_ERRORS[i])) {
+        return true;
+      }
     }
 
     // Check deterministic failures that require user intervention
-    if (DETERMINISTIC_FAILURES.some((msg) => lowerError.includes(msg))) {
-      return true;
+    for (let i = 0; i < DETERMINISTIC_FAILURES.length; i++) {
+      if (lowerError.includes(DETERMINISTIC_FAILURES[i])) {
+        return true;
+      }
     }
 
     return false;
