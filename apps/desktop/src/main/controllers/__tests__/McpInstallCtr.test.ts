@@ -15,7 +15,11 @@ vi.mock('@/utils/logger', () => ({
 }));
 
 // Mock browserManager
-const mockBrowserManager = {
+type MockBrowserManager = {
+  broadcastToWindow: ReturnType<typeof vi.fn>;
+};
+
+const mockBrowserManager: MockBrowserManager = {
   broadcastToWindow: vi.fn(),
 };
 
