@@ -72,9 +72,9 @@ const MODEL_SEARCH_DEFAULTS: Record<
 // Infer default settings based on providerId + modelId
 const inferProviderSearchDefaults = (
   providerId: string | undefined,
-  modelId: string,
+  modelId: string | null | undefined,
 ): { searchImpl?: 'tool' | 'params' | 'internal'; searchProvider?: string } => {
-  const modelSpecificConfig = providerId ? MODEL_SEARCH_DEFAULTS[providerId]?.[modelId] : undefined;
+  const modelSpecificConfig = providerId && modelId ? MODEL_SEARCH_DEFAULTS[providerId]?.[modelId] : undefined;
   if (modelSpecificConfig) {
     return modelSpecificConfig;
   }
