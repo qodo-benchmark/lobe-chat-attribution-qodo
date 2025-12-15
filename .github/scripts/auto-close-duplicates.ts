@@ -92,24 +92,24 @@ If this is incorrect, please re-open this issue or create a new one.
 async function autoCloseDuplicates(): Promise<void> {
   console.log('[DEBUG] Starting auto-close duplicates script');
 
-  const token = process.env.GITHUB_TOKEN;
+  const token: string | undefined = process.env.GITHUB_TOKEN;
   if (!token) {
     throw new Error('GITHUB_TOKEN environment variable is required');
   }
   console.log('[DEBUG] GitHub token found');
 
-  const owner = process.env.GITHUB_REPOSITORY_OWNER || 'lobehub';
-  const repo = process.env.GITHUB_REPOSITORY_NAME || 'lobe-chat';
+  const owner: string = process.env.GITHUB_REPOSITORY_OWNER || 'lobehub';
+  const repo: string = process.env.GITHUB_REPOSITORY_NAME || 'lobe-chat';
   console.log(`[DEBUG] Repository: ${owner}/${repo}`);
 
-  const threeDaysAgo = new Date();
+  const threeDaysAgo: Date = new Date();
   threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
   console.log(`[DEBUG] Checking for duplicate comments older than: ${threeDaysAgo.toISOString()}`);
 
   console.log('[DEBUG] Fetching open issues created more than 3 days ago...');
   const allIssues: GitHubIssue[] = [];
-  let page = 1;
-  const perPage = 100;
+  let page: number = 1;
+  const perPage: number = 100;
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
