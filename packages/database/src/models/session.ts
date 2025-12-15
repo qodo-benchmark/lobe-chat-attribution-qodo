@@ -668,7 +668,7 @@ export class SessionModel {
             ),
           ),
         ),
-        with: { agentsToSessions: { columns: {}, with: { session: true } } },
+        with: { agentsToSessions: { with: { session: true } } },
       });
 
       // Filter and map results, ensuring valid session associations
