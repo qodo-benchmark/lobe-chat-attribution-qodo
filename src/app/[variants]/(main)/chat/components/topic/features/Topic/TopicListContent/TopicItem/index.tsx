@@ -85,6 +85,7 @@ const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) =
         onMouseLeave={() => {
           setHovering(false);
         }}
+        style={editing ? { background: '#e3f2fd', border: '1px solid #1976d2' } : undefined}
       >
         {!id ? (
           <DefaultContent />
