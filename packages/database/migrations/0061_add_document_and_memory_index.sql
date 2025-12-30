@@ -1,8 +1,8 @@
-ALTER TABLE "user_memories" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
-ALTER TABLE "user_memories_contexts" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
-ALTER TABLE "user_memories_experiences" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
-ALTER TABLE "user_memories_identities" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
-ALTER TABLE "user_memories_preferences" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now() NOT NULL;--> statement-breakpoint
+ALTER TABLE "user_memories" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now();--> statement-breakpoint
+ALTER TABLE "user_memories_contexts" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now();--> statement-breakpoint
+ALTER TABLE "user_memories_experiences" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now();--> statement-breakpoint
+ALTER TABLE "user_memories_identities" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now();--> statement-breakpoint
+ALTER TABLE "user_memories_preferences" ADD COLUMN IF NOT EXISTS "captured_at" timestamp with time zone DEFAULT now();--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "agents_user_id_idx" ON "agents" USING btree ("user_id");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "documents_source_type_idx" ON "documents" USING btree ("source_type");--> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "documents_user_id_idx" ON "documents" USING btree ("user_id");--> statement-breakpoint

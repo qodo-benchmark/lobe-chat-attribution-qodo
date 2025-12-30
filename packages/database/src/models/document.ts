@@ -47,7 +47,7 @@ export class DocumentModel {
     items: DocumentItem[];
     total: number;
   }> => {
-    const offset = current * pageSize;
+    const offset = (current - 1) * pageSize;
     const conditions = [eq(documents.userId, this.userId)];
 
     if (fileTypes?.length) {
@@ -103,7 +103,7 @@ export class DocumentModel {
       pages: null,
     })) as DocumentItem[];
 
-    return { items, total: totalResult[0].count };
+    return { items, total: totalResult[0]?.count ?? 0 };
   };
 
   findById = async (id: string): Promise<DocumentItem | undefined> => {
