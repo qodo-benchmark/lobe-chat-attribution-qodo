@@ -196,7 +196,6 @@ export const knowledgeBases = pgTable(
   },
   (t) => [
     uniqueIndex('knowledge_bases_client_id_user_id_unique').on(t.clientId, t.userId),
-    index('knowledge_bases_user_id_idx').on(t.userId),
   ],
 );
 

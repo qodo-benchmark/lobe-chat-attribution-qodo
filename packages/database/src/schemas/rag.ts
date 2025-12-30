@@ -82,7 +82,6 @@ export const embeddings = pgTable(
     uniqueIndex('embeddings_client_id_user_id_unique').on(t.clientId, t.userId),
     // improve delete embeddings query
     index('embeddings_chunk_id_idx').on(t.chunkId),
-    index('embeddings_user_id_idx').on(t.userId),
   ],
 );
 
