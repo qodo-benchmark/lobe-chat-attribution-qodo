@@ -70,6 +70,7 @@ export const userMemoriesContexts = pgTable(
       >(),
 
     title: text('title'),
+    titleVector: vector('title_vector', { dimensions: 1024 }),
     description: text('description'),
     descriptionVector: vector('description_vector', { dimensions: 1024 }),
 

