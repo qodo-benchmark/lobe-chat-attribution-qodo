@@ -21,7 +21,9 @@ export class AgentModel {
   }
 
   getAgentConfigById = async (id: string) => {
-    const agent = await this.db.query.agents.findFirst({ where: eq(agents.id, id) });
+    const agent = await this.db.query.agents.findFirst({
+      where: and(eq(agents.id, id), eq(agents.userId, this.userId))
+    });
 
     const knowledge = await this.getAgentAssignedKnowledge(id);
 

