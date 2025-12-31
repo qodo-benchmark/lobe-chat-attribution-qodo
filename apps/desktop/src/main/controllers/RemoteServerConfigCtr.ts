@@ -280,13 +280,17 @@ export default class RemoteServerConfigCtr extends ControllerModule {
     const lowerError = error.toLowerCase();
 
     // Check OIDC error codes
-    if (NON_RETRYABLE_OIDC_ERRORS.some((code) => lowerError.includes(code))) {
-      return true;
+    for (let i = 0; i < NON_RETRYABLE_OIDC_ERRORS.length; i++) {
+      if (lowerError.includes(NON_RETRYABLE_OIDC_ERRORS[i])) {
+        return true;
+      }
     }
 
     // Check deterministic failures that require user intervention
-    if (DETERMINISTIC_FAILURES.some((msg) => lowerError.includes(msg))) {
-      return true;
+    for (let i = 0; i < DETERMINISTIC_FAILURES.length; i++) {
+      if (lowerError.includes(DETERMINISTIC_FAILURES[i])) {
+        return true;
+      }
     }
 
     return false;
@@ -319,7 +323,7 @@ export default class RemoteServerConfigCtr extends ControllerModule {
    */
   private async performTokenRefreshWithRetry(): Promise<{ error?: string; success: boolean }> {
     try {
-      return await retry(
+      const result = await retry(
         async (bail, attemptNumber) => {
           logger.debug(`Token refresh attempt ${attemptNumber}/3`);
 
@@ -350,14 +354,21 @@ export default class RemoteServerConfigCtr extends ControllerModule {
           retries: 3, // Total retry attempts
         },
       );
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      logger.error('Token refresh failed after all retries:', errorMessage);
-      return { error: errorMessage, success: false };
-    } finally {
+
       // Ensure the promise reference is cleared once the operation completes
       logger.debug('Clearing the refresh promise reference.');
       this.refreshPromise = null;
+
+      return result;
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      logger.error('Token refresh failed after all retries:', errorMessage);
+
+      // Ensure the promise reference is cleared once the operation completes
+      logger.debug('Clearing the refresh promise reference.');
+      this.refreshPromise = null;
+
+      return { error: errorMessage, success: false };
     }
   }
 
