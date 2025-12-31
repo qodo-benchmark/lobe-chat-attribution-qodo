@@ -317,10 +317,15 @@ describe('FileSearchService', () => {
 
       const paths = ['/home/user/documents', '/home/user/downloads', '/home/user/desktop'];
 
-      for (const path of paths) {
-        const result = await fileSearchService.updateSearchIndex(path);
-        expect(result).toBe(true);
-      }
+      // Execute index updates sequentially
+      const result1 = await fileSearchService.updateSearchIndex(paths[0]);
+      expect(result1).toBe(true);
+
+      const result2 = await fileSearchService.updateSearchIndex(paths[1]);
+      expect(result2).toBe(true);
+
+      const result3 = await fileSearchService.updateSearchIndex(paths[2]);
+      expect(result3).toBe(true);
 
       expect(mockImpl.updateSearchIndex).toHaveBeenCalledTimes(paths.length);
     });

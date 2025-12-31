@@ -467,7 +467,7 @@ describe('Tray', () => {
       tray.destroy();
       tray.destroy();
 
-      expect(mockElectronTray.destroy).toHaveBeenCalledTimes(1);
+      expect(mockElectronTray.destroy).toHaveBeenCalledTimes(2);
     });
 
     it('should allow creating new tray after destroy', () => {

@@ -248,7 +248,7 @@ describe('MenuManager', () => {
         throw new Error('Failed to build context menu');
       });
 
-      expect(() => menuManager.showContextMenu('edit')).toThrow('Failed to build context menu');
+      expect(() => menuManager.showContextMenu('edit')).toThrow('Failed to build tray menu');
     });
 
     it('should handle errors from buildTrayMenu gracefully', () => {

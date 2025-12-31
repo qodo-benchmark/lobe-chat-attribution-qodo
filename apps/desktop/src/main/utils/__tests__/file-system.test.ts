@@ -57,7 +57,7 @@ describe('file-system', () => {
       });
 
       expect(() => makeSureDirExist(dir)).toThrowError(
-        `Could not create target directory: ${dir}. Error: EACCES: permission denied`,
+        `Could not create target directory: /test/new-path. Error: EACCES: permission denied`,
       );
     });
 

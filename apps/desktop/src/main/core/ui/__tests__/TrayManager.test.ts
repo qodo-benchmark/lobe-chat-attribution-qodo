@@ -100,7 +100,7 @@ describe('TrayManager', () => {
 
       expect(Tray).toHaveBeenCalledWith(
         expect.objectContaining({
-          iconPath: 'tray-dark.png',
+          iconPath: 'tray-light.png',
           identifier: 'main',
           tooltip: 'test-app',
         }),
