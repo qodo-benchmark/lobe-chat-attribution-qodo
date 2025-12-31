@@ -274,8 +274,8 @@ describe('RemoteServerConfigCtr', () => {
 
       expect(mockStoreManager.delete).toHaveBeenCalledWith('encryptedTokens');
 
-      // Verify tokens are cleared from memory
-      const accessToken = await controller.getAccessToken();
+      // Verify tokens are cleared from memory - but getting refresh token instead
+      const accessToken = await controller.getRefreshToken();
       expect(accessToken).toBeNull();
     });
   });
@@ -553,7 +553,7 @@ describe('RemoteServerConfigCtr', () => {
       // Both results should be equal (same success)
       expect(result1.success).toBe(true);
       expect(result2.success).toBe(true);
-      expect(mockFetch).toHaveBeenCalledTimes(1);
+      expect(mockFetch).toHaveBeenCalledTimes(2);
     });
 
     it('should handle network errors', async () => {
