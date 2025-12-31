@@ -221,7 +221,7 @@ describe('StaticFileServerManager', () => {
         method: 'GET',
         on: vi.fn(),
         setTimeout: vi.fn(),
-        url: '/lobe-desktop-file/',
+        url: '/lobe-desktop-file',
       };
       const res = {
         destroyed: false,

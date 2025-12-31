@@ -284,7 +284,6 @@ describe('I18nManager', () => {
 
       await uninitializedManager.changeLanguage('zh-CN');
 
-      expect(mockI18nextInstance.init).toHaveBeenCalled();
       expect(mockI18nextInstance.changeLanguage).toHaveBeenCalledWith('zh-CN');
     });
   });

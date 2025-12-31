@@ -110,5 +110,23 @@
     "helpText": "ブラウザが自動的に開かない場合は、キャンセルをクリックして再試行してください",
     "retry": "再試行",
     "title": "認証接続を待機中"
+  },
+  "menu": {
+    "about": "LobeChat について",
+    "checkForUpdates": "アップデートを確認",
+    "edit": "編集",
+    "file": "ファイル",
+    "help": "ヘルプ",
+    "preferences": "環境設定",
+    "quit": "終了",
+    "view": "表示",
+    "window": "ウィンドウ"
+  },
+  "dialog": {
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "ok": "OK",
+    "yes": "はい",
+    "no": "いいえ"
   }
 }

@@ -298,6 +298,7 @@ describe('ProtocolManager', () => {
       mockApp.isDefaultProtocolClient.mockReturnValue(true);
 
       expect(manager.isRegistered()).toBe(true);
+      expect(mockApp.isDefaultProtocolClient).toHaveBeenCalledWith('lobehub');
     });
 
     it('should return false when not registered', () => {

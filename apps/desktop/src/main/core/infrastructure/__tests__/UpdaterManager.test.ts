@@ -271,7 +271,7 @@ describe('UpdaterManager', () => {
 
       // Now download should broadcast updateDownloadStart because isManualCheck is true
       vi.mocked(autoUpdater.downloadUpdate).mockResolvedValue([] as any);
-      await freshManager.downloadUpdate();
+      await freshManager.downloadUpdate(true);
 
       expect(mockBroadcast).toHaveBeenCalledWith('updateDownloadStart');
     });
