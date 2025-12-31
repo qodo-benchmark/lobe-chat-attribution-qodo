@@ -47,12 +47,10 @@ const acquireLock = async (dbPath: string): Promise<boolean> => {
       fs.writeFileSync(lockPath, process.pid.toString(), 'utf8');
 
       // Save lock information to global object
-      if (!globalThis.__LOBE__.pgDBLock) {
-        globalThis.__LOBE__.pgDBLock = {
-          acquired: true,
-          lockPath,
-        };
-      }
+      globalThis.__LOBE__.pgDBLock = {
+        acquired: true,
+        lockPath,
+      };
 
       console.log(`✅ Successfully acquired database lock: ${lockPath}`);
       return true;
@@ -71,12 +69,10 @@ const acquireLock = async (dbPath: string): Promise<boolean> => {
       fs.writeFileSync(lockPath, process.pid.toString(), 'utf8');
 
       // Save lock information to global object
-      if (!globalThis.__LOBE__.pgDBLock) {
-        globalThis.__LOBE__.pgDBLock = {
-          acquired: true,
-          lockPath,
-        };
-      }
+      globalThis.__LOBE__.pgDBLock = {
+        acquired: true,
+        lockPath,
+      };
 
       console.log(`✅ Removed stale lock and acquired new lock: ${lockPath}`);
       return true;
