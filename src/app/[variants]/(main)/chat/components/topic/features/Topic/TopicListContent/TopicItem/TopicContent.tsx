@@ -114,8 +114,8 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
         icon: <Icon icon={LucideCopy} />,
         key: 'duplicate',
         label: t('actions.duplicate'),
-        onClick: () => {
-          duplicateTopic(id);
+        onClick: async () => {
+          await duplicateTopic(id);
         },
       },
       // {
@@ -212,10 +212,10 @@ const TopicContent = memo<TopicContentProps>(({ id, title, fav, showMore }) => {
           editing={editing}
           onBlur={(e) => {
             const v = (e.target as HTMLInputElement).value;
+            toggleEditing(false);
             if (title !== v) {
               updateTopicTitle(id, v);
             }
-            toggleEditing(false);
           }}
           onChangeEnd={(v) => {
             if (title !== v) {

