@@ -28,6 +28,7 @@ export const agents = pgTable(
       .primaryKey()
       .$defaultFn(() => idGenerator('agents'))
       .notNull(),
+    // @ts-ignore - Type issue with slug default function
     slug: varchar('slug', { length: 100 }).$defaultFn(() => randomSlug(3)),
     title: varchar('title', { length: 255 }),
     description: varchar('description', { length: 1000 }),
