@@ -47,8 +47,8 @@ const createStore: StateCreator<ChatStore, [['zustand/devtools', never]]> = (...
   ...chatTTS(...params),
   ...chatToolSlice(...params),
   ...chatPlugin(...params),
-  ...chatPortalSlice(...params),
   ...operationActions(...params),
+  ...chatPortalSlice(...params),
 
   // cloud
 });

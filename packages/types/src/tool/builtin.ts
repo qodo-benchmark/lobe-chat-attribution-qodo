@@ -18,7 +18,7 @@ interface Meta {
    * @nameEN Description
    * @descEN Plugin description
    */
-  description?: string;
+  description: string;
   /**
    * tags
    * @desc Tags of the plugin
@@ -26,7 +26,7 @@ interface Meta {
    * @descEN Plugin tags
    */
   tags?: string[];
-  title: string;
+  title?: string;
 }
 
 const MetaSchema = z.object({

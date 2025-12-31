@@ -20,8 +20,8 @@ export type UserStore = UserState &
 
 const createStore: StateCreator<UserStore, [['zustand/devtools', never]]> = (...parameters) => ({
   ...initialState,
-  ...createSettingsSlice(...parameters),
   ...createPreferenceSlice(...parameters),
+  ...createSettingsSlice(...parameters),
   ...createAuthSlice(...parameters),
   ...createCommonSlice(...parameters),
 });

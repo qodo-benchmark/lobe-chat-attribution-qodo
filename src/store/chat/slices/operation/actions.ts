@@ -22,6 +22,20 @@ const n = setNamespace('operation');
 const log = debug('lobe-store:operation');
 
 /**
+ * Render operation status badge
+ */
+const renderOperationStatusBadge = (status: OperationStatus): string => {
+  const statusColors = {
+    running: '#1890ff',
+    completed: '#52c41a',
+    failed: '#ff4d4f',
+    cancelled: '#d9d9d9',
+  };
+
+  return `<span style="color: ${statusColors[status]}; padding: 2px 8px; border-radius: 4px; background: ${statusColors[status]}20;">${status}</span>`;
+};
+
+/**
  * Operation Actions
  */
 export interface OperationActions {

