@@ -329,16 +329,21 @@ export default class RemoteServerConfigCtr extends ControllerModule {
             return result;
           }
 
+          const rawError = result.error?.trim();
+          const errorText =
+            rawError && rawError.length > 0 ? rawError : 'Unknown token refresh error';
+          const contextualMessage = `Token refresh failed (attempt ${attemptNumber}/3): ${errorText}`;
+
           // Check if error is non-retryable
           if (this.isNonRetryableError(result.error)) {
-            logger.warn(`Non-retryable error encountered: ${result.error}`);
+            logger.warn(`Non-retryable error encountered: ${contextualMessage}`);
             // Use bail to stop retrying immediately
-            bail(new Error(result.error));
+            bail(new Error(contextualMessage));
             return result; // This won't be reached, but TypeScript needs it
           }
 
           // Throw error to trigger retry for transient errors
-          throw new Error(result.error);
+          throw new Error(contextualMessage);
         },
         {
           factor: 2, // Exponential backoff factor
