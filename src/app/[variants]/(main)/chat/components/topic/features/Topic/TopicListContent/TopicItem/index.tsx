@@ -4,6 +4,7 @@ import qs from 'query-string';
 import { Suspense, memo, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
+import { isDesktop } from '@/const/version';
 import { useChatStore } from '@/store/chat';
 import { useGlobalStore } from '@/store/global';
 import { useSessionStore } from '@/store/session';
@@ -52,7 +53,10 @@ export interface ConfigCellProps {
 
 const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) => {
   const { styles, cx } = useStyles();
-  const toggleConfig = useGlobalStore((s) => s.toggleMobileTopic);
+  const [toggleConfig, openTopicInNewWindow] = useGlobalStore((s) => [
+    s.toggleMobileTopic,
+    s.openTopicInNewWindow,
+  ]);
   const [toggleTopic, editing] = useChatStore((s) => [s.switchTopic, s.topicRenamingId === id]);
   const activeId = useSessionStore((s) => s.activeId);
   const [isHover, setHovering] = useState(false);
@@ -69,8 +73,12 @@ const TopicItem = memo<ConfigCellProps>(({ title, active, id, fav, threadId }) =
           if (editing) return;
           // Ctrl/Cmd+点击在新窗口打开
           if (e.button === 0 && (e.metaKey || e.ctrlKey) && id) {
+            if (isDesktop && activeId) {
+              void openTopicInNewWindow(activeId, id);
+              return;
+            }
             const topicUrl = qs.stringifyUrl({
-              query: { session: activeId, topic: id },
+              query: { session: activeId, topic: id, mode: 'single' },
               url: '/chat',
             });
             window.open(topicUrl, '_blank');
