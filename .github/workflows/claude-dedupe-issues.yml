@@ -24,6 +24,28 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Resolve issue number
+        id: issue
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "issues" ]]; then
+            echo "issue_number=${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ ! "${{ inputs.issue_number }}" =~ ^[0-9]+$ ]]; then
+              echo "Invalid issue_number input: must be numeric." >&2
+              exit 1
+            fi
+
+            echo "issue_number=${{ inputs.issue_number }}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Unsupported event: ${{ github.event_name }}" >&2
+          exit 1
+
       - name: Run Claude Code slash command
         uses: anthropics/claude-code-action@main
         with:
@@ -32,4 +54,4 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # Security: Using slash command which has built-in restrictions
           # The /dedupe command only performs read operations and label additions
-          prompt: '/dedupe ${{ github.repository }}/issues/${{ github.event.issue.number || inputs.issue_number }}'
+          prompt: '/dedupe ${{ github.repository }}/issues/${{ steps.issue.outputs.issue_number }}'
